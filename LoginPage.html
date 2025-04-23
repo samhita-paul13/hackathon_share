@@ -3,6 +3,9 @@
     <head>
         <title>Login</title>
         <link rel="stylesheet" href="LoginPage.css">
+         <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+         <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
+         <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-database-compat.js"></script>
     </head>
     <body>
         <div style="opacity:0.7;"><img src="images/logoforxyz.png" style="height:80px;width:80px;z-index:100;border-radius: 40px;;"></div>
@@ -13,29 +16,6 @@
             <div><input type="text" placeholder="Enter password"></div>
             <div><button>Login</button></div>
         </div>
-        <script type="module">
-  // Import the functions you need from the SDKs you need
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-app.js";
-  import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-analytics.js";
-  // TODO: Add SDKs for Firebase products that you want to use
-  // https://firebase.google.com/docs/web/setup#available-libraries
-
-  // Your web app's Firebase configuration
-  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
-  const firebaseConfig = {
-    apiKey: "AIzaSyD4PvKcHD72FY7FpVIqcjCJRz0bwxzp9Ms",
-    authDomain: "hackathon-9b458.firebaseapp.com",
-    databaseURL: "https://hackathon-9b458-default-rtdb.firebaseio.com",
-    projectId: "hackathon-9b458",
-    storageBucket: "hackathon-9b458.firebasestorage.app",
-    messagingSenderId: "203489211048",
-    appId: "1:203489211048:web:61365127dc1962632a889d",
-    measurementId: "G-D83F536TTB"
-  };
-
-  // Initialize Firebase
-  const app = initializeApp(firebaseConfig);
-  const analytics = getAnalytics(app);
-</script>
+       <script src="LoginPage.js"></script>
     </body>
 </html>
