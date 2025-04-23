@@ -31,12 +31,12 @@ document.getElementById("login-btn").addEventListener("click", () => {
 
   auth.signInWithEmailAndPassword(email, password)
     .then((userCredential) => {
-      // Clear error
+      
       errorMsg.textContent = "";
 
-      // Check for special user
+
       if (email === "datta.arshia@gmail.com" && password === "Adp1@700042") {
-       // Page A
+      
       } else {
      
       }
