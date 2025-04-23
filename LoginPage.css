@@ -1,0 +1,12 @@
+body{
+    font-size: 16px;
+}
+
+input{
+    display:block;
+    margin-bottom:20px;
+    padding:10px 60px;
+}
+button{
+    padding:10px 20px;
+}
