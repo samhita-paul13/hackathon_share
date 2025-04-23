@@ -24,7 +24,7 @@
 firebase.initializeApp(firebaseConfig);
 const auth = firebase.auth();
 
-document.getElementById("login-btn").addEventListener("click", () => {
+document.getElementById("login").addEventListener("click", () => {
   const email = document.getElementById("email").value.trim();
   const password = document.getElementById("password").value.trim();
   const errorMsg = document.getElementById("error-message");
