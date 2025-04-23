@@ -20,3 +20,28 @@
   // Initialize Firebase
   const app = initializeApp(firebaseConfig);
   const analytics = getAnalytics(app);
+
+firebase.initializeApp(firebaseConfig);
+const auth = firebase.auth();
+
+document.getElementById("login-btn").addEventListener("click", () => {
+  const email = document.getElementById("email").value.trim();
+  const password = document.getElementById("password").value.trim();
+  const errorMsg = document.getElementById("error-message");
+
+  auth.signInWithEmailAndPassword(email, password)
+    .then((userCredential) => {
+      // Clear error
+      errorMsg.textContent = "";
+
+      // Check for special user
+      if (email === "datta.arshia@gmail.com" && password === "Adp1@700042") {
+       // Page A
+      } else {
+     
+      }
+    })
+    .catch((error) => {
+      errorMsg.textContent = "Try again";
+    });
+});
