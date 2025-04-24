@@ -1,0 +1,9 @@
+.added
+{
+    background-color:white;
+    opacity:0.09;
+}
+.added:hover{
+    background-color: rgb(233, 233, 233);
+    opacity:0.7;
+}

@@ -1,0 +1,9 @@
+.media-button{
+    background-color: white;
+    margin-top:250px;
+    border:none;
+}
+.media-button:hover {
+    background-color: rgb(233, 233, 233);
+    cursor: pointer;
+}
