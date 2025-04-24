@@ -1,89 +1,97 @@
 const express = require('express');
 const multer = require('multer');
-const fs = require('fs');
+const fluent_ffmpeg = require('fluent-ffmpeg');
 const path = require('path');
-const axios = require('axios');  // For image fetching from the alternative API
-
+const fs = require('fs');
+const mammoth = require('mammoth');
 const app = express();
-const port = 3000;
+const port = process.env.PORT || 3000;
 
-// Use multer for file uploads
-const storage = multer.memoryStorage();
-const upload = multer({ storage: storage });
-
+// Set up static file serving
 app.use(express.static('public'));
-app.use(express.json());
 
-// Route for video title generation
-app.post('/generate-title', upload.single('file'), async (req, res) => {
-    const videoFile = req.file;
-
-    // Send the video file to OpenAI for analysis to generate a title
-    const title = await generateTitle(videoFile); // Implement the logic to generate a title using OpenAI
-    res.json({ title });
+// Set up multer for file uploads
+const videoStorage = multer.diskStorage({
+    destination: (req, file, cb) => {
+        cb(null, 'uploads/videos');
+    },
+    filename: (req, file, cb) => {
+        cb(null, Date.now() + path.extname(file.originalname)); // Add timestamp to filename
+    },
 });
 
-// Route for video description generation
-app.post('/generate-description', upload.single('file'), async (req, res) => {
-    const videoFile = req.file;
-
-    // Send the video file to OpenAI for analysis to generate a description
-    const description = await generateDescription(videoFile); // Implement the logic to generate a description using OpenAI
-    res.json({ description });
+const docStorage = multer.diskStorage({
+    destination: (req, file, cb) => {
+        cb(null, 'uploads/blogs');
+    },
+    filename: (req, file, cb) => {
+        cb(null, Date.now() + path.extname(file.originalname)); // Add timestamp to filename
+    },
 });
 
-// Route for video thumbnail generation (using external image API)
-app.post('/generate-thumbnail', upload.single('file'), async (req, res) => {
-    const videoFile = req.file;
+const videoUpload = multer({ storage: videoStorage });
+const docUpload = multer({ storage: docStorage });
 
-    // Fetch image related to the video using your chosen API (substitute this with the correct API logic)
-    const thumbnailUrl = await generateThumbnail(videoFile); // Image API request
-    res.json({ thumbnailUrl });
-});
-
-// Route for saving video data (this will only store references, no file)
-app.post('/submit-video', upload.single('file'), async (req, res) => {
-    const videoFile = req.file;
-    const title = req.body.title;
-    const description = req.body.description;
-    const thumbnail = req.body.thumbnail;
-
-    // Save the data to Firebase Realtime Database
-    const videoData = {
-        title,
-        description,
-        thumbnail,
-    };
-
-    // Add to Firebase (Firebase setup omitted)
-    const videoRef = await firebase.database().ref('videos').push(videoData);
-    res.json({ message: 'Video uploaded and data saved to Firebase' });
-});
-
-// Helper function to generate title from video (OpenAI API interaction)
-async function generateTitle(videoFile) {
-    // Interact with OpenAI API here
-    return "Generated Title for Video";
-}
-
-// Helper function to generate description from video (OpenAI API interaction)
-async function generateDescription(videoFile) {
-    // Interact with OpenAI API here
-    return "Generated description for video based on analysis.";
-}
-
-// Helper function to fetch thumbnail from the external API
-async function generateThumbnail(videoFile) {
-    const imageAPIUrl = 'https://api.pexels.com/v1/search?query=gaming&per_page=1';  // Replace with actual image API
-    try {
-        const response = await axios.get(imageAPIUrl);
-        return response.data.thumbnailUrl;
-    } catch (error) {
-        console.error("Error fetching thumbnail: ", error);
-        return ''; // Return empty if there's an error
+// Endpoint for uploading videos
+app.post('/upload-video', videoUpload.single('video'), (req, res) => {
+    if (!req.file) {
+        return res.status(400).json({ message: 'No video file uploaded' });
     }
-}
 
+    // Generate video thumbnail using FFmpeg
+    const videoPath = path.join(__dirname, 'uploads', 'videos', req.file.filename);
+    const thumbnailPath = path.join(__dirname, 'uploads', 'thumbnails', req.file.filename + '.jpg');
+    
+    fluent_ffmpeg(videoPath)
+        .on('end', () => {
+            console.log('Thumbnail generated');
+            res.status(200).json({ message: 'Video uploaded successfully', thumbnail: thumbnailPath });
+        })
+        .on('error', (err) => {
+            console.error('Error generating thumbnail:', err);
+            res.status(500).json({ message: 'Error generating thumbnail' });
+        })
+        .screenshots({
+            timestamps: ['00:00:01.000'],  // Take a snapshot at 1 second
+            filename: path.basename(thumbnailPath),
+            folder: path.dirname(thumbnailPath),
+            size: '320x240', // Resize the thumbnail if needed
+        });
+});
+
+// Endpoint for uploading blog documents
+app.post('/upload-blog', docUpload.single('doc'), (req, res) => {
+    if (!req.file) {
+        return res.status(400).json({ message: 'No document file uploaded' });
+    }
+
+    const docPath = path.join(__dirname, 'uploads', 'blogs', req.file.filename);
+    
+    // If it's a .docx file
+    if (path.extname(docPath) === '.docx') {
+        mammoth.extractRawText({ path: docPath })
+            .then((result) => {
+                const textContent = result.value;
+                const blogTitle = `How to Generate a Blog from Your Document: ${req.file.filename}`;
+                const blogIntro = `This blog explores how to generate a meaningful article from your document titled: ${req.file.filename}. Here's the content extracted from it:`;
+
+                // Apply a simple blog template
+                const generatedBlog = `
+                    <h1>${blogTitle}</h1>
+                    <p>${blogIntro}</p>
+                    <p>${textContent}</p>
+                `;
+
+                res.status(200).json({ message: 'Blog uploaded and content generated', blog: generatedBlog });
+            })
+            .catch((error) => {
+                console.error('Error reading the document:', error);
+                res.status(500).json({ message: 'Error processing document' });
+            });
+    }
+});
+
+// Start server
 app.listen(port, () => {
-    console.log(`Server is running at http://localhost:${port}`);
+    console.log(`Server running at http://localhost:${port}`);
 });
