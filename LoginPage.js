@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
-    firebase.initializeApp(firebaseConfig);
+    
 const firebaseConfig = {
   apiKey: "AIzaSyD4PvKcHD72FY7FpVIqcjCJRz0bwxzp9Ms",
   authDomain: "hackathon-9b458.firebaseapp.com",
@@ -11,7 +11,7 @@ const firebaseConfig = {
   measurementId: "G-D83F536TTB"
 };
 
-
+const app = firebase.initializeApp(firebaseConfig);
  
 
 
