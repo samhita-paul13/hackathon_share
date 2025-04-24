@@ -26,11 +26,6 @@ const app = firebase.initializeApp(firebaseConfig);
 });
 
 
-  // Login button click event
-  document.getElementById("login").addEventListener("click", () => {
-    const email = document.getElementById("email").value.trim();
-    const password = document.getElementById("password").value.trim();
-    const errorMsg = document.getElementById("error-message");
 
     auth.signInWithEmailAndPassword(email, password)
       .then((userCredential) => {
