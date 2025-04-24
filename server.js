@@ -13,7 +13,8 @@ const { v4: uuidv4 } = require('uuid');
 ffmpeg.setFfmpegPath(ffmpegPath);
 
 // Firebase setup
-const serviceAccount = require('./serviceAccountKey.json'); // Your Firebase service account key
+const serviceAccount = require('/workspaces/hackathon_share/hackathon-9b458-firebase-adminsdk-fbsvc-31f0953de2.json'); // Your Firebase service account key
+const { publicDecrypt } = require('crypto');
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
   databaseURL: 'https://hackathon-9b458-default-rtdb.firebaseio.com'
@@ -22,7 +23,21 @@ admin.initializeApp({
 const db = admin.database();
 
 const app = express();
-const upload = multer({ dest: 'uploads/' });
+let upload = multer({ dest: 'uploads/' });
+
+
+// Serve static files from the 'public' folder
+app.use(express.static('public'));
+
+// Route for root path
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname,'public', 'LoginPage.html')); // change to your actual login file name
+});
+
+// Start the server
+app.listen(3000, () => {
+  console.log('Server is running on http://localhost:3000');
+});
 
 app.use(express.static('public'));
 
@@ -66,12 +81,8 @@ app.post('/upload-video', upload.single('video'), (req, res) => {
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
 
-const express = require('express');
-const multer = require('multer');
-const fs = require('fs');
-const path = require('path');
 
-const app = express();
+
 const port = 3000;
 
 // Set up multer storage
@@ -84,7 +95,7 @@ const storage = multer.diskStorage({
   }
 });
 
-const upload = multer({ storage: storage });
+ upload = multer({ storage: storage });
 
 // Middleware to serve static files (for HTML, CSS, JS)
 app.use(express.static('public'));
