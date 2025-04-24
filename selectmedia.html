@@ -2,6 +2,7 @@
 <html>
     <head>
         <link rel="stylesheet" href="selectmedia.css">
+        
         <title>Media</title>
     </head>
     <body style="font-size:20px;">
@@ -9,7 +10,7 @@
         
                 <div style="display:flex;flex-direction:row;flex-grow:1;">
                     <p style="flex:1;">Videos</p>
-                    <button class="media-button" style="height:50px;width:50px;border-radius:25px;margin-top:0px;">></button>
+                    <button class="media-button" style="height:50px;width:50px;border-radius:25px;margin-top:0px;" onclick="playVideo(event)"><a href="videoUpload.html">></a></button>
                 </div> 
                 <div style="display:flex;flex-direction:row;">  
                     <div style="width:160px;height:80px;border:1px solid black;margin-right:10px;">Project 1</div>
@@ -19,12 +20,28 @@
               
             <div style="display:flex;flex-direction:row;align-items: center;flex-grow: 1;">
                 <p style="flex:1;">Blogs</p>
-                <button class="media-button" style="height:50px;width:50px;border-radius:25px;margin-top:0px;">></button>
+                <button class="media-button" style="height:50px;width:50px;border-radius:25px;margin-top:0px;"><a href="blogUpload.html">></a></button>
             </div> 
             <div style="display:flex;flex-direction:row;">  
                 <div style="width:160px;height:80px;border:1px solid black;margin-right:10px;">Project 1</div>
                 <div style="width:160px;height:80px;border:1px solid black;">Project 2</div>
             </div> 
         </div>
+        <form action="">
+            <p>Select a video:</p>
+            <input type="file" id="myfile" accept="video/*" >
+            <video id="videoPreview" width="320" height="240"></video>
+        </form>
+        <script>
+            function playVideo(event) {
+                const file = event.target.files[0];
+                if (file) {
+                    const video = document.getElementById('videoPreview');
+                    video.src = URL.createObjectURL(file);
+                    video.load();
+                    
+                }
+            }
+        </script>
     </body>
 </html>
