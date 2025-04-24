@@ -36,9 +36,9 @@ document.getElementById("login").addEventListener("click", () => {
 
 
       if (email === "datta.arshia@gmail.com" && password === "Adp1@700042") {
-      
+        window.location.href = "homeManager.html"; 
       } else {
-     
+        window.location.href = "home.html"; 
       }
     })
     .catch((error) => {
