@@ -95,7 +95,7 @@ document.getElementById("submit-btn").addEventListener("click", () => {
     completion: "0%"
   });
 
-  // Add to UI
+
   const card = document.createElement("div");
   card.className = "mcard";
   card.innerHTML = `
