@@ -77,25 +77,43 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 
+// Video upload button
 const videoInput = document.getElementById('videoInput');
+// Document upload button
 const docInput = document.getElementById('docInput');
 
-function triggerVideoUpload() {
-  videoInput.click();
+// Trigger video upload
+function triggerUploadVideo() {
+  videoInput.click();  // Opens the file manager for video
 }
 
-function triggerDocUpload() {
-  docInput.click();
+// Trigger document upload
+function triggerUploadDoc() {
+  docInput.click();  // Opens the file manager for document
 }
 
-videoInput.addEventListener('change', () => {
+// Handle video file selection
+videoInput.addEventListener('change', (event) => {
   if (videoInput.files.length > 0) {
-    window.location.href = "videoUpload.html"; // Change to your real path
+    const videoFile = videoInput.files[0];
+    
+    // Store video data temporarily (could be done using sessionStorage, localStorage, or another approach)
+    window.localStorage.setItem("videoFile", JSON.stringify(videoFile));
+    
+    // Redirect to the generation page
+    window.location.href = "videoUpload.html";  
   }
 });
 
-docInput.addEventListener('change', () => {
+// Handle document file selection (for blog content)
+docInput.addEventListener('change', (event) => {
   if (docInput.files.length > 0) {
-    window.location.href = "blogUpload.html"; // Change to your real path
+    const docFile = docInput.files[0];
+    
+    // Store document data temporarily
+    window.localStorage.setItem("docFile", JSON.stringify(docFile));
+    
+    // Redirect to the generation page
+    window.location.href = "blogUpload.html";  
   }
 });
