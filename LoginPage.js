@@ -78,3 +78,36 @@ document.getElementById("submit-btn").addEventListener("click", () => {
   document.getElementById("name-input").value = "";
   document.getElementById("role-input").value = "";
 });
+document.getElementById("submit-btn").addEventListener("click", () => {
+  const name = document.getElementById("name-input").value.trim();
+  const role = document.getElementById("role-input").value.trim();
+
+  if (!name || !role) {
+    alert("Please fill in both fields.");
+    return;
+  }
+
+ 
+  const newMemberRef = db.ref("members").push(); // auto-ID
+  newMemberRef.set({
+    name: name,
+    role: role,
+    completion: "0%"
+  });
+
+  // Add to UI
+  const card = document.createElement("div");
+  card.className = "mcard";
+  card.innerHTML = `
+    <p><strong>Name:</strong> ${name}</p>
+    <p><strong>Role:</strong> ${role}</p>
+    <p><strong>Completion:</strong> 0%</p>
+  `;
+
+  document.getElementById("container").appendChild(card);
+  document.getElementById("popup").style.display = "none";
+
+
+  document.getElementById("name-input").value = "";
+  document.getElementById("role-input").value = "";
+});
