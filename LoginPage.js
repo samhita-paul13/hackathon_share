@@ -77,118 +77,32 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 
-// Video upload button
-const videoInput = document.getElementById('videoInput');
-// Document upload button
-const docInput = document.getElementById('docInput');
-
-// Trigger video upload
+// For handling video upload
 function triggerUploadVideo() {
-  videoInput.click();  // Opens the file manager for video
+    const videoFile = document.getElementById("videoInput").files[0];
+    
+    // Store the video file in local storage or process as needed
+    if (videoFile) {
+        localStorage.setItem("videoFile", JSON.stringify(videoFile));
+
+        // Redirect to the video generation page
+        window.location.href = 'videoUpload.html';  // Replace with your actual path
+    } else {
+        alert('Please select a video file!');
+    }
 }
 
-// Trigger document upload
+// For handling blog document upload
 function triggerUploadDoc() {
-  docInput.click();  // Opens the file manager for document
-}
+    const docFile = document.getElementById("docInput").files[0];
 
-// Handle video file selection
-videoInput.addEventListener('change', (event) => {
-  if (videoInput.files.length > 0) {
-    const videoFile = videoInput.files[0];
-    
-    // Store video data temporarily (could be done using sessionStorage, localStorage, or another approach)
-    window.localStorage.setItem("videoFile", JSON.stringify(videoFile));
-    
-    // Redirect to the generation page
-    window.location.href = "videoUpload.html";  
-  }
-});
+    // Store the doc file in local storage or process as needed
+    if (docFile) {
+        localStorage.setItem("docFile", JSON.stringify(docFile));
 
-// Handle document file selection (for blog content)
-docInput.addEventListener('change', (event) => {
-  if (docInput.files.length > 0) {
-    const docFile = docInput.files[0];
-    
-    // Store document data temporarily
-    window.localStorage.setItem("docFile", JSON.stringify(docFile));
-    
-    // Redirect to the generation page
-    window.location.href = "blogUpload.html";  
-  }
-});
-// Retrieve uploaded video or document from localStorage
-let videoFile = JSON.parse(localStorage.getItem("videoFile"));
-let docFile = JSON.parse(localStorage.getItem("docFile"));
-let title = "";
-let description = "";
-let thumbnailUrl = "";
-
-// Generate title from video
-function generateTitle() {
-  const formData = new FormData();
-  formData.append('file', videoFile);
-
-  fetch('/generate-title', {
-    method: 'POST',
-    body: formData
-  })
-  .then(response => response.json())
-  .then(data => {
-    title = data.title;
-    document.getElementById('title').innerText = data.title;  // Display generated title
-  });
-}
-
-// Generate description from video
-function generateDescription() {
-  const formData = new FormData();
-  formData.append('file', videoFile);
-
-  fetch('/generate-description', {
-    method: 'POST',
-    body: formData
-  })
-  .then(response => response.json())
-  .then(data => {
-    description = data.description;
-    document.getElementById('description').innerText = data.description;  // Display generated description
-  });
-}
-
-// Generate thumbnail from video
-function generateThumbnail() {
-  const formData = new FormData();
-  formData.append('file', videoFile);
-
-  fetch('/generate-thumbnail', {
-    method: 'POST',
-    body: formData
-  })
-  .then(response => response.json())
-  .then(data => {
-    thumbnailUrl = data.thumbnailUrl;
-    document.getElementById('thumbnail').src = thumbnailUrl;  // Display generated thumbnail
-  });
-}
-
-// Submit the generated content and video to Firebase
-function submitData() {
-  const formData = new FormData();
-  formData.append('file', videoFile);
-  formData.append('title', title);
-  formData.append('description', description);
-  formData.append('thumbnail', thumbnailUrl);
-
-  fetch('/submit-video', {
-    method: 'POST',
-    body: formData
-  })
-  .then(response => response.json())
-  .then(data => {
-    alert('Video uploaded and data saved to Firebase');
-    localStorage.removeItem("videoFile");  // Clear localStorage
-    window.location.href = "/";  // Redirect to the upload page
-  })
-  .catch(err => console.error('Error uploading video: ', err));
+        // Redirect to the blog generation page
+        window.location.href = 'blogUpload.html';  // Replace with your actual path
+    } else {
+        alert('Please select a blog document!');
+    }
 }
