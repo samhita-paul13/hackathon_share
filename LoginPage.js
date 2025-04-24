@@ -18,17 +18,14 @@ const firebaseConfig = {
   firebase.analytics();
   const auth = firebase.auth();
   const db = firebase.database();
-
+ document.getElementById("login").addEventListener("click", () => {
+    const email = document.getElementById("email").value.trim();
+    const password = document.getElementById("password").value.trim();
+    const errorMsg = document.getElementById("error-message");
   // All your addEventListener code goes here...
 });
 
-firebase.initializeApp(firebaseConfig);
-firebase.analytics();
-const auth = firebase.auth();
-const db = firebase.database();
 
-// Login functionality
-document.addEventListener("DOMContentLoaded", () => {
   // Login button click event
   document.getElementById("login").addEventListener("click", () => {
     const email = document.getElementById("email").value.trim();
