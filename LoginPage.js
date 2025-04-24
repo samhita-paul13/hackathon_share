@@ -45,7 +45,7 @@ document.getElementById("login").addEventListener("click", () => {
       errorMsg.textContent = "Try again";
     });
 });
-document.getElementById("add-btn").addEventListener("click", () => {
+document.getElementById("add").addEventListener("click", () => {
   document.getElementById("popup").style.display = "block";
 });
 
