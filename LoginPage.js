@@ -22,7 +22,7 @@ const analytics = firebase.analytics();
 const auth = firebase.auth();
 
 const db = firebase.database();
-
+document.addEventListener("DOMContentLoaded", () => {
 document.getElementById("login").addEventListener("click", () => {
   const email = document.getElementById("email").value.trim();
   const password = document.getElementById("password").value.trim();
