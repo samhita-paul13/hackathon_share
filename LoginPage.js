@@ -106,3 +106,79 @@ function triggerUploadDoc() {
         alert('Please select a blog document!');
     }
 }
+
+const firebaseConfig = {
+  apiKey: "AIzaSyD4PvKcHD72FY7FpVIqcjCJRz0bwxzp9Ms",
+  authDomain: "hackathon-9b458.firebaseapp.com",
+  databaseURL: "https://hackathon-9b458-default-rtdb.firebaseio.com",
+  projectId: "hackathon-9b458",
+  storageBucket: "hackathon-9b458.appspot.com",
+  messagingSenderId: "203489211048",
+  appId: "1:203489211048:web:61365127dc1962632a889d"
+};
+
+firebase.initializeApp(firebaseConfig);
+const db = firebase.database();
+
+let videoThumbnail = "";
+let videoTitle = "";
+let videoDescription = "";
+
+function generateThumbnail() {
+  // Simulated thumbnail URL
+  videoThumbnail = 'https://via.placeholder.com/400x200.png?text=Thumbnail';
+  const imgElement = document.querySelector("div div img");
+  imgElement.src = videoThumbnail;
+  imgElement.style.width = "400px";
+  imgElement.style.height = "200px";
+}
+
+function generateTitle() {
+  // Simulated title generation
+  const titles = [
+     "Top 10 Minecraft Mods"
+    "Best Mods in Minecraft."
+  ];
+  videoTitle = titles[Math.floor(Math.random() * titles.length)];
+  let titleDiv = document.getElementById("title");
+  if (!titleDiv) {
+    titleDiv = document.createElement("div");
+    titleDiv.id = "title";
+    document.body.appendChild(titleDiv);
+  }
+  titleDiv.textContent = `Title: ${videoTitle}`;
+}
+
+function generateDescription() {
+  // Simulated description generation
+  const descriptions = [
+   "This is the best mod in minecraft."
+   "Mincraft mods are the best."
+  ];
+  videoDescription = descriptions[Math.floor(Math.random() * descriptions.length)];
+  let descDiv = document.getElementById("description");
+  if (!descDiv) {
+    descDiv = document.createElement("div");
+    descDiv.id = "description";
+    document.body.appendChild(descDiv);
+  }
+  descDiv.textContent = `Description: ${videoDescription}`;
+}
+
+function submitData() {
+  if (!videoThumbnail || !videoTitle || !videoDescription) {
+    alert("Please generate all fields before submitting.");
+    return;
+  }
+
+  const newVideoRef = db.ref("videos").push();
+  newVideoRef.set({
+    thumbnail: videoThumbnail,
+    title: videoTitle,
+    description: videoDescription,
+    timestamp: Date.now()
+  });
+
+  alert("Data submitted successfully!");
+}
+
