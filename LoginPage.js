@@ -43,7 +43,7 @@ document.getElementById("login").addEventListener("click", () => {
     .catch((error) => {
       errorMsg.textContent = "Try again";
     });
-});
+});});
 document.getElementById("add").addEventListener("click", () => {
   document.getElementById("popup").style.display = "block";
 });
