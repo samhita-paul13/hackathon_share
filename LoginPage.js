@@ -77,3 +77,25 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 
+const videoInput = document.getElementById('videoInput');
+const docInput = document.getElementById('docInput');
+
+function triggerVideoUpload() {
+  videoInput.click();
+}
+
+function triggerDocUpload() {
+  docInput.click();
+}
+
+videoInput.addEventListener('change', () => {
+  if (videoInput.files.length > 0) {
+    window.location.href = "videoUpload.html"; // Change to your real path
+  }
+});
+
+docInput.addEventListener('change', () => {
+  if (docInput.files.length > 0) {
+    window.location.href = "blogUpload.html"; // Change to your real path
+  }
+});
