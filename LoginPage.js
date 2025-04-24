@@ -117,3 +117,78 @@ docInput.addEventListener('change', (event) => {
     window.location.href = "blogUpload.html";  
   }
 });
+// Retrieve uploaded video or document from localStorage
+let videoFile = JSON.parse(localStorage.getItem("videoFile"));
+let docFile = JSON.parse(localStorage.getItem("docFile"));
+let title = "";
+let description = "";
+let thumbnailUrl = "";
+
+// Generate title from video
+function generateTitle() {
+  const formData = new FormData();
+  formData.append('file', videoFile);
+
+  fetch('/generate-title', {
+    method: 'POST',
+    body: formData
+  })
+  .then(response => response.json())
+  .then(data => {
+    title = data.title;
+    document.getElementById('title').innerText = data.title;  // Display generated title
+  });
+}
+
+// Generate description from video
+function generateDescription() {
+  const formData = new FormData();
+  formData.append('file', videoFile);
+
+  fetch('/generate-description', {
+    method: 'POST',
+    body: formData
+  })
+  .then(response => response.json())
+  .then(data => {
+    description = data.description;
+    document.getElementById('description').innerText = data.description;  // Display generated description
+  });
+}
+
+// Generate thumbnail from video
+function generateThumbnail() {
+  const formData = new FormData();
+  formData.append('file', videoFile);
+
+  fetch('/generate-thumbnail', {
+    method: 'POST',
+    body: formData
+  })
+  .then(response => response.json())
+  .then(data => {
+    thumbnailUrl = data.thumbnailUrl;
+    document.getElementById('thumbnail').src = thumbnailUrl;  // Display generated thumbnail
+  });
+}
+
+// Submit the generated content and video to Firebase
+function submitData() {
+  const formData = new FormData();
+  formData.append('file', videoFile);
+  formData.append('title', title);
+  formData.append('description', description);
+  formData.append('thumbnail', thumbnailUrl);
+
+  fetch('/submit-video', {
+    method: 'POST',
+    body: formData
+  })
+  .then(response => response.json())
+  .then(data => {
+    alert('Video uploaded and data saved to Firebase');
+    localStorage.removeItem("videoFile");  // Clear localStorage
+    window.location.href = "/";  // Redirect to the upload page
+  })
+  .catch(err => console.error('Error uploading video: ', err));
+}
