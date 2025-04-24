@@ -45,3 +45,34 @@ document.getElementById("login").addEventListener("click", () => {
       errorMsg.textContent = "Try again";
     });
 });
+document.getElementById("add-btn").addEventListener("click", () => {
+  document.getElementById("popup").style.display = "block";
+});
+
+document.getElementById("cancel-btn").addEventListener("click", () => {
+  document.getElementById("popup").style.display = "none";
+});
+
+document.getElementById("submit-btn").addEventListener("click", () => {
+  const name = document.getElementById("name-input").value.trim();
+  const role = document.getElementById("role-input").value.trim();
+
+  if (!name || !role) {
+    alert("Please fill in both fields.");
+    return;
+  }
+
+  const card = document.createElement("div");
+  card.className = "mcard";
+  card.innerHTML = `
+    <p><strong>Name:</strong> ${name}</p>
+    <p><strong>Role:</strong> ${role}</p>
+    <p><strong>Completion:</strong> 0%</p>
+  `;
+
+  document.getElementById("container").appendChild(card);
+  document.getElementById("popup").style.display = "none";
+
+  document.getElementById("name-input").value = "";
+  document.getElementById("role-input").value = "";
+});
