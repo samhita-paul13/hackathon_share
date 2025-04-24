@@ -2,6 +2,7 @@
 {
     background-color:white;
     opacity:0.09;
+    z-index:999;
 }
 .added:hover{
     background-color: rgb(233, 233, 233);
