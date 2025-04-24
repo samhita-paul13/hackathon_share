@@ -74,7 +74,7 @@ async function generateDescription(videoFile) {
 
 // Helper function to fetch thumbnail from the external API
 async function generateThumbnail(videoFile) {
-    const imageAPIUrl = 'https://api.example.com/search?query=video-thumbnail';  // Replace with actual image API
+    const imageAPIUrl = 'https://api.pexels.com/v1/search?query=gaming&per_page=1';  // Replace with actual image API
     try {
         const response = await axios.get(imageAPIUrl);
         return response.data.thumbnailUrl;
