@@ -21,10 +21,80 @@
             <div style="display:flex;flex-direction:row;align-items: center;flex-grow: 1;">
                 <p style="flex:1;">Blogs</p>
                     <input type="file" id="docInput" style="display: block" />
-                <button class="media-button" id="blogUploadButton" style="height:50px;width:50px;border-radius:25px;margin-top:0px;" onclick="triggerUploadDoc()"><a href="blogUpload.html">></a></button>
+                <button class="media-button" id="blogUploadButton" style="height:50px;width:50px;border-radius:25px;margin-top:0px;"><a href="blogUpload.html">></a></button>
             </div>
 
     </div>
-    <script src="blogUpload.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const docInput = document.getElementById('docInput');
+            if (docInput) {
+                docInput.addEventListener('change', uploadBlogIdea); // Call upload on file change
+            }
+
+            function triggerUploadVideo() {
+                const videoFile = document.getElementById("videoInput").files[0];
+                if (!videoFile) {
+                    alert('Please select a video file!');
+                } else {
+                    localStorage.setItem('videoFile', JSON.stringify(videoFile));
+                    window.location.href = 'videoUpload.html';
+                }
+            }
+
+            function triggerUploadDoc() {
+                const docFile = document.getElementById("docInput").files[0];
+                if (!docFile) {
+                    alert('Please select a blog document!');
+                }
+                // You might want to handle the file here or navigate
+                // For now, the upload will happen on 'change' of docInput
+            }
+
+            const videoButton = document.getElementById("videoUploadButton");
+            if (videoButton) {
+                videoButton.addEventListener("click", triggerUploadVideo);
+            } else {
+                console.log("Video upload button not found on this page.");
+            }
+
+            const blogButton = document.getElementById("blogUploadButton");
+            if (blogButton) {
+                // You might not need an onclick here if upload is on 'change'
+                // blogButton.addEventListener("click", triggerUploadDoc);
+            } else {
+                console.log("Blog upload button not found on this page.");
+            }
+
+            // Function to handle file upload and fetch generated title & content
+            function uploadBlogIdea() {
+                const fileInput = document.getElementById('docInput');
+                const file = fileInput.files[0];
+
+                if (!file) {
+                    alert('Please select a blog idea file!');
+                    return;
+                }
+
+                const formData = new FormData();
+                formData.append('blogIdeaFile', file);
+
+                fetch('/upload-blog-idea', {
+                    method: 'POST',
+                    body: formData
+                })
+                .then(response => response.json())
+                .then(data => {
+                    // Populate title and content on the blog upload page
+                    localStorage.setItem('blogTitle', data.title);
+                    localStorage.setItem('blogContent', data.content);
+                    window.location.href = 'blogUpload.html'; // Navigate after upload
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+            }
+        });
+    </script>
 </body>
 </html>
