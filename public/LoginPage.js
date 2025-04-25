@@ -107,18 +107,7 @@ function triggerUploadDoc() {
     }
 }
 
-const firebaseConfig = {
-  apiKey: "AIzaSyD4PvKcHD72FY7FpVIqcjCJRz0bwxzp9Ms",
-  authDomain: "hackathon-9b458.firebaseapp.com",
-  databaseURL: "https://hackathon-9b458-default-rtdb.firebaseio.com",
-  projectId: "hackathon-9b458",
-  storageBucket: "hackathon-9b458.appspot.com",
-  messagingSenderId: "203489211048",
-  appId: "1:203489211048:web:61365127dc1962632a889d"
-};
 
-firebase.initializeApp(firebaseConfig);
-const db = firebase.database();
 
 let videoThumbnail = "";
 let videoTitle = "";
