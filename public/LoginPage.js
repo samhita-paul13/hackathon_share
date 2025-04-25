@@ -137,7 +137,7 @@ function generateTitle() {
   // Simulated title generation
   const titles = [
      "Top 10 Minecraft Mods"
-    "Best Mods in Minecraft."
+    ,"Best Mods in Minecraft."
   ];
   videoTitle = titles[Math.floor(Math.random() * titles.length)];
   let titleDiv = document.getElementById("title");
@@ -153,7 +153,7 @@ function generateDescription() {
   // Simulated description generation
   const descriptions = [
    "This is the best mod in minecraft."
-   "Mincraft mods are the best."
+  , "Mincraft mods are the best."
   ];
   videoDescription = descriptions[Math.floor(Math.random() * descriptions.length)];
   let descDiv = document.getElementById("description");
