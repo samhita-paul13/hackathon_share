@@ -33,39 +33,7 @@
         </div>
     </div>
 
-    <script>
-        function halaha()
-        {
-        document.addEventListener("DOMContentLoaded", () => { // Function to handle file upload and fetch generated title & content
-        function uploadBlogIdea() {
-            const fileInput = document.getElementById('docInput');
-            const file = fileInput.files[0];
-
-            if (!file) {
-                alert('Please select a blog idea file!');
-                return;
-            }
-
-            const formData = new FormData();
-            formData.append('docInput', file);
-
-            // Make the API call to upload the blog idea file and fetch generated title & content
-            fetch('/upload-blog-idea', {
-                method: 'POST',
-                body: formData
-            })
-            .then(response => response.json())
-            .then(data => {
-                // Populate title and content
-                document.getElementById('blogTitle').value = data.title;
-                document.getElementById('blogContent').value = data.content;
-            })
-            .catch(error => {
-                console.error('Error:', error);
-            });
-        }});
-    }
-    </script>
+   
          <script src="blogUpload.js"></script>
 </body>
 </html>
