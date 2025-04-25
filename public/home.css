@@ -1,0 +1,28 @@
+.tabs
+{
+    padding:10px 30px;
+    border-style:solid;
+    border-right:0px;
+    border-top:1px;
+    border-bottom:1px;
+    border-color:black;
+    margin-top:0px;
+    background-color:white;
+}
+.upload{
+    background-color: white;
+    margin-top:250px;
+}
+.upload:hover {
+    background-color: rgb(233, 233, 233);
+    cursor: pointer;
+}
+a:link{
+    text-decoration: none;
+    color:black;
+}
+body{
+    background-color:rgb(10, 248, 177);
+    font-family:Arial;
+}
+

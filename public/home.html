@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Your Projects</title>
+        <link rel="stylesheet" href="home.css">
+        <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-database-compat.js"></script>
+        <link rel="stylesheet" href="progress.css">
+    </head>
+    <body>
+        <div style="display:flex;flex-direction:column;height:100vh;">
+            
+            <div style="display:flex;flex-direction:row;">
+                <div class="tabs" style="width:255px;text-align:center;border:1px solid black;font-size:24px;color:rgb(151, 36, 151);font-weight:bold;">TEAM</div>
+                <div class="tabs" style="width:255px;text-align:center;border:1px solid black;font-size:24px;color:rgb(151, 36, 151);font-weight:bold;">DASHBOARD</div>
+                <div class="tabs" style="flex:1;text-align:center;border:1px solid black;"></div>
+                <div style="display:flex;flex-direction:row;justify-content: center;align-items:center;border:1px solid black;background-color:white;">
+                    <div style="display:flex;flex-direction:row;width:200px;height:20px;border:1px solid black;margin:20px 20px;" class="container">
+                        <div class="covered" style="background-color:rgb(77, 238, 112);"></div>
+                        <div class="not-covered" ></div>
+                    </div>
+                    <button class="decrease">-5</button>
+                    <button class="increase">+5</button>
+                </div>
+            </div>
+            <div style="display:flex;flex-direction:row;flex-grow:1;border:1px solid black">
+                <div class="tabs" style="width:310px;text-align:center;padding:0px;background-color:purple;">
+                    <div style="display:flex;flex-direction:column;">
+                        <div style="flex:1;border:1px solid black;margin:4px 8px;border-radius:10px;display:flex;flex-direction:column;align-items:center;justify-content:center;background-color:white;">
+                            <p>Name:Samhita Paul</p>
+                            <p>Role:frontend</p>
+                            <div style="display:flex;flex-direction:row;width:200px;height:20px;border:1px solid black;margin:20px 20px;" class="container">
+                                <div style="background-color:rgb(77, 238, 112);width:80px;height:20px;"></div>
+                                <div style="flex:1;" ></div>
+                            </div>
+                        </div>
+                        <div style="flex:1;border:1px solid black;margin:4px 8px;border-radius:10px;display:flex;flex-direction:column;align-items:center;justify-content:center;background-color:white;">
+                            <p>Name:Arshia Datta</p>
+                            <p>Role:backend</p>
+                            <div style="display:flex;flex-direction:row;width:200px;height:20px;border:1px solid black;margin:20px 20px;" class="container">
+                                <div style="background-color:rgb(77, 238, 112);width:50px;height:20px;"></div>
+                                <div style="flex:1;"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="tabs" style="flex:1;text-align:center;padding:0px;background-color:rgb(242, 234, 243)">
+                <button class="upload" style="border-radius:50px;border:none;height:100px;width:100px;"><a href="selectmedia.html" style="font-size:50px;">+</a></button>
+                </div>
+                
+            </div>
+        </div>
+        <script src="progress.js"></script>
+    </body>
+</html>
+
+
+  
