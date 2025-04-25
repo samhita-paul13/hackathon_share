@@ -2,31 +2,33 @@
 <html>
     <head>
         <title>Team</title>
-        <link rel="stylesheet" href="homeManager.css">
+        <link rel="stylesheet" href="teamManager.css">
+        <link rel="stylesheet" href="progress.css">
+        
     </head>
     <body>
         <div style="display:flex;flex-direction:column;height:100vh;">
-            
             <div style="display:flex;flex-direction:row;">
-                <div class="tabs" style="width:250px;text-align:center;">team</div>
-                <div class="tabs" style="width:250px;text-align:center;">dashboard</div>
-                <div class="tabs" style="flex:1;text-align:center;"></div>
-            </div>
+                <div class="tabs" style="width:255px;text-align:center;border:1px solid black;font-size:24px;color:rgb(151, 36, 151);font-weight:bold;">TEAM</div>
+                <div class="tabs" style="width:255px;text-align:center;border:1px solid black;font-size:24px;color:rgb(151, 36, 151);font-weight:bold;">DASHBOARD</div>
+                <div class="tabs" style="flex:1;text-align:center;border:1px solid black;"></div>
+                <div style="display:flex;flex-direction:row;justify-content: center;align-items:center;border:1px solid black;background-color:white;">
+                        <div style="display:flex;flex-direction:row;width:200px;height:20px;border:1px solid black;margin:20px 20px;" class="container">
+                            <div class="covered" style="background-color:rgb(77, 238, 112);"></div>
+                            <div class="not-covered" ></div>
+                        </div>
+                        <button class="decrease">-5</button>
+                        <button class="increase">+5</button>
+                </div>
+            </div>   
             <div style="display:flex;flex-direction:row;flex-grow:1;border:2px solid black">
                 <div class="tabs" style="flex:1;text-align:center;padding:0px;">
-                    <p style="margin:0px;border-top:1px;border-bottom:1px;border-color:black;border-style:solid;">Team</p>
+                    
                     <div style="display:flex;flex-direction:row;">
-                        <div class="mcard" style="flex:1;border:1px solid black;margin:6px 3px;border-radius:10px;">
-                            <p>Name:Samhita Paul</p>
-                            <p>Role:frontend</p>
-                            <p>Completion:5%</p>
+                        
+                        <div class="mcard" style="flex:1;display:grid;">
+
                         </div>
-                        <div class="mcard" style="flex:1;border:1px solid black;margin:6px 3px;border-radius:10px;">
-                            <p>Name:Arshia Datta</p>
-                            <p>Role:backend</p>
-                            <p>Completion:5%</p>
-                        </div>
-                       
                     </div>
                     <button id="add" class="upload" style="margin-top:20px;height:40px;width:40px;border-radius:20px;font-size:25px;" 
                         onclick="document.getElementById('popup').style.display = 'block';">+</button>
@@ -34,11 +36,11 @@
                 
                   <div id="container"></div>
 
-  <div id="popup" style="display: none;">
-    <h3>Add Member</h3>
-    <input type="text" id="name-input" placeholder="Enter Name">
-    <input type="text" id="role-input" placeholder="Enter Role">
-    <button id="submit-btn">Submit</button>
+  <div id="popup" style="display: none;border:3px solid rgb(100, 14, 100);">
+    <h3 style="color:rgb(100, 14, 100);">Add Member</h3>
+    <input type="text" id="name-input" placeholder="Enter Name" style="border-radius:3px;">
+    <input type="text" id="role-input" placeholder="Enter Role" style="border-radius:3px;">
+    <button id="submit-btn" onclick="addRole2();" style="margin-bottom:8px;">Submit</button>
     <button id="cancel-btn" onclick="document.getElementById('popup').style.display = 'none';">Cancel</button>
   </div>
                 
@@ -54,7 +56,9 @@
   <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-analytics.js"></script>
 
   <!-- Your code -->
+  <script src="progress.js"></script>
   <script src="LoginPage.js"></script>
+  <script src="teamManagerupgrade.js"></script>
 </body>
 
          
