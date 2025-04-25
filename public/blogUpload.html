@@ -12,30 +12,33 @@
         <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-analytics-compat.js"></script>
             <script src="LoginPage.js"></script>
 </head>
-<body>
+<body style="background-color: rgb(243, 210, 243);">
     <div style="display:flex;justify-content: space-around;">
         <div style="flex:4;display:flex;align-items:top;justify-content:center;margin:0px;">
-            <div style="border: 1px solid black;height:600px;margin:20px 0px;width:550px;display:flex;flex-direction: column;align-items:center;justify-content:center;">
-                <div>Write your blog</div>
+            <div style="margin-left:72px;border: 1px solid rgb(38, 4, 58);height:600px;margin-top:20px;width:550px;display:flex;flex-direction: column;align-items:center;justify-content:top;background-color: white;">
+                <div style="font-weight:bold;font-size:20px;padding:10px;">Write your blog</div>
                
-                <button class="add" style="height:70px;width:70px;border-radius:35px;font-size:40px;border:none;" onclick="Generateblog()">+</button>
+                <div style="display: flex;align-items: center;justify-content: center;flex:1;"><button class="add" style="height:70px;width:70px;border-radius:35px;font-size:40px;border:none;" onclick="halaha()">+</button>
             </div>
         </div>
         <div style="flex:5;display:flex;flex-direction: column;align-items:center;justify-content:top;margin-top:20px;">
-            <div style="height:200px;width:700px;border: 1px solid black;align-items:center;justify-content:center;display:flex;flex-direction: column;">
-              
-            <div style="height:400px;width:700px;border: 1px solid black;align-items:center;justify-content:center;display:flex;flex-direction: column;">
-                <div>Blog Content</div>
-                <textarea id="blogContent" style="width:100%;height:100%;" readonly></textarea>
-            </div><button class="add" style="height:70px;width:70px;border-radius:35px;font-size:40px;border:none;" onclick="Generateblogtitle()">+</button>
-               <button id="submitButton" onclick="submitData()">Submit</button> 
+            <div style="height:150px;width:700px;border: 1px solid rgb(38, 4, 58);background-color:purple;align-items:center;justify-content:center;display:flex;flex-direction: column;padding:0px;margin-bottom:15px;">
+                <div style="border:none;font-size:22px;font-weight:bold;padding:10px;color:white;">Title</div>
+                
+                <input style="height:50px;width:660px;margin-top:10px;" type="text" placeholder="Enter title" id="blogTitle" style="width:100%;" readonly />
+                <button class="add" style="height:50px;width:50px;border-radius:25px;font-size:30px;border:none;margin-top:10px;margin-bottom:10px;" onclick="halaha()">+</button>
+            </div>
+            
+               <button id="submitButton" onclick="submitData()" style="margin:20px;padding:10px 20px;font-size:18px;border-radius:5px;color:white;background-color:purple">Submit</button> 
         </div>
     </div>
 
     <script>
-        // Function to handle file upload and fetch generated title & content
+        function halaha()
+        {
+        document.addEventListener("DOMContentLoaded", () => { // Function to handle file upload and fetch generated title & content
         function uploadBlogIdea() {
-            const fileInput = document.getElementById('blogIdeaFile');
+            const fileInput = document.getElementById('docInput');
             const file = fileInput.files[0];
 
             if (!file) {
@@ -44,7 +47,7 @@
             }
 
             const formData = new FormData();
-            formData.append('blogIdeaFile', file);
+            formData.append('docInput', file);
 
             // Make the API call to upload the blog idea file and fetch generated title & content
             fetch('/upload-blog-idea', {
@@ -60,7 +63,8 @@
             .catch(error => {
                 console.error('Error:', error);
             });
-        }
+        }});
+    }
     </script>
 </body>
 </html>
