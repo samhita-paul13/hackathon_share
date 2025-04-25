@@ -170,4 +170,85 @@ function submitData() {
 
   alert("Data submitted successfully!");
 }
+const formData = new FormData();
+formData.append('blogIdeaFile', file);
 
+// Make the API call to upload the blog idea file and fetch generated title & content
+fetch('/upload-blog-idea', {
+    method: 'POST',
+    body: formData
+})
+.then(response => response.json())
+.then(data => {
+    // Populate title and content
+    document.getElementById('blogTitle').value = data.title;
+    document.getElementById('blogContent').value = data.content;
+})
+.catch(error => {
+    console.error('Error:', error);
+});
+
+
+// Function to generate blog content from the uploaded Word document
+function Generateblog() {
+const fileInput = document.getElementById('blogIdeaFile');
+const file = fileInput.files[0];
+
+if (file) {
+    const reader = new FileReader();
+    reader.onload = function(event) {
+        const arrayBuffer = event.target.result;
+
+        mammoth.extractRawText({ arrayBuffer: arrayBuffer })
+            .then(function(result) {
+                const text = result.value;
+
+                // Generate the blog content from the extracted text
+                const blogTitle = generateTitle(text);
+                const blogContent = generateContent(text);
+
+                // Update the blog title and content on the page
+                document.getElementById('blogContent').value = blogContent;
+                document.getElementById('blogTitle').value = blogTitle;
+            })
+            .catch(function(err) {
+                console.error('Error parsing document:', err);
+            });
+    };
+    reader.readAsArrayBuffer(file);
+}
+}
+
+// Helper functions to generate title and content
+function generateTitle(text) {
+// Example: Take the first 20 words from the document and generate the title
+const words = text.split(/\s+/);
+const title = words.slice(0, 20).join(' ') + '...';
+return title;
+}
+
+function generateContent(text) {
+// Example: Take the first paragraph as the blog content
+const firstParagraph = text.split('\n')[0];
+return firstParagraph;
+}
+
+// Submit blog data to Firebase
+function submitData() {
+const title = document.getElementById('blogTitle').value;
+const content = document.getElementById('blogContent').value;
+
+if (!title || !content) {
+    alert("Please generate both the title and content before submitting.");
+    return;
+}
+
+const newBlogRef = db.ref("blogs").push();
+newBlogRef.set({
+    title: title,
+    content: content,
+    timestamp: Date.now()
+});
+
+alert("Blog submitted successfully!");
+}
