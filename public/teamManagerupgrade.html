@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Tryna</title>
+        <link rel="stylesheet" href="teamManagerupgrade.css">
+    </head>
+    <body>
+        <div style="display:flex;flex-direction:column;">
+            <div style="display:flex;flex-direction: row;">
+                <div class="tabs" style="width:250px;padding:20px 20px;">Team</div>
+                <div class="tabs" style="width:250px;padding:20px 20px;">Dashboard</div>
+            </div>
+            <div>
+                <div>Team</div>
+                <div class="product-grid" style="flex:1;display:grid;">
+
+                </div>
+            </div>
+            <div>
+                <button id="add" class="upload" style="margin-top:20px;height:40px;width:40px;border-radius:20px;font-size:25px;" 
+                        onclick="document.getElementById('popup').style.display = 'block';" >+</button>
+                    
+        </div>
+        </div>
+        <div id="popup" style="display: none;">
+         <h3>Add Member</h3>
+        <input type="text" id="name-input" placeholder="Enter Name">
+        <input type="text" id="role-input" placeholder="Enter Role">
+        <button id="submit-btn" onclick="addRole();">Submit</button>
+        <button id="cancel-btn" onclick="document.getElementById('popup').style.display = 'none';">Cancel</button>
+        </div>
+        <script src="teamManagerupgrade.js">
+        </script>
+    </body>
+</html>

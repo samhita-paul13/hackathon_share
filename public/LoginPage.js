@@ -129,12 +129,8 @@ function generateTitle() {
     ,"Best Mods in Minecraft."
   ];
   videoTitle = titles[Math.floor(Math.random() * titles.length)];
-  let titleDiv = document.getElementById("title");
-  if (!titleDiv) {
-    titleDiv = document.createElement("div");
-    titleDiv.id = "title";
-    document.body.appendChild(titleDiv);
-  }
+  let titleDiv = document.querySelector('.generateTitle');
+  titleDiv.innerText=videoDescription;
   titleDiv.textContent = `Title: ${videoTitle}`;
 }
 
@@ -145,12 +141,9 @@ function generateDescription() {
   , "Mincraft mods are the best."
   ];
   videoDescription = descriptions[Math.floor(Math.random() * descriptions.length)];
-  let descDiv = document.getElementById("description");
-  if (!descDiv) {
-    descDiv = document.createElement("div");
-    descDiv.id = "description";
-    document.body.appendChild(descDiv);
-  }
+  let descDiv = document.querySelector('.generateDescription')
+  
+   descDiv.innerText=videoDescription;
   descDiv.textContent = `Description: ${videoDescription}`;
 }
 

@@ -5,27 +5,42 @@
         <link rel="stylesheet" href="home.css">
         <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
         <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-database-compat.js"></script>
+        <link rel="stylesheet" href="progress.css">
     </head>
     <body>
         <div style="display:flex;flex-direction:column;height:100vh;">
             
             <div style="display:flex;flex-direction:row;">
-                <div class="tabs" style="width:250px;text-align:center;">team</div>
-                <div class="tabs" style="width:250px;text-align:center;">dashboard</div>
-                <div class="tabs" style="flex:1;text-align:center;"></div>
+                <div class="tabs" style="width:255px;text-align:center;border:1px solid black;font-size:24px;color:rgb(151, 36, 151);font-weight:bold;">TEAM</div>
+                <div class="tabs" style="width:255px;text-align:center;border:1px solid black;font-size:24px;color:rgb(151, 36, 151);font-weight:bold;">DASHBOARD</div>
+                <div class="tabs" style="flex:1;text-align:center;border:1px solid black;"></div>
+                <div style="display:flex;flex-direction:row;justify-content: center;align-items:center;border:1px solid black;background-color:white;">
+                        <div style="display:flex;flex-direction:row;width:200px;height:20px;border:1px solid black;margin:20px 20px;" class="container">
+                            <div class="covered" style="background-color:rgb(77, 238, 112);"></div>
+                            <div class="not-covered" ></div>
+                        </div>
+                        <button class="decrease">-5</button>
+                        <button class="increase">+5</button>
+                </div>
             </div>
             <div style="display:flex;flex-direction:row;flex-grow:1;border:2px solid black">
-                <div class="tabs" style="flex:1;text-align:center;padding:0px;"><p style="margin:0px;border-top:1px;border-bottom:1px;border-color:black;border-style:solid;">Team</p>
+                <div class="tabs" style="flex:1;text-align:center;padding:0px;background-color:purple;">
                     <div style="display:flex;flex-direction:row;">
-                        <div style="flex:1;border:1px solid black;margin:2px 2px;border-radius:10px;">
+                        <div style="flex:1;border:1px solid black;margin:4px 8px;border-radius:10px;display:flex;flex-direction:column;align-items:center;justify-content:center;background-color:white;">
                             <p>Name:Samhita Paul</p>
                             <p>Role:frontend</p>
-                            <p>Completion:5%</p>
+                            <div style="display:flex;flex-direction:row;width:200px;height:20px;border:1px solid black;margin:20px 20px;" class="container">
+                                <div style="background-color:rgb(77, 238, 112);width:50px;height:20px;"></div>
+                                <div style="flex:1;"></div>
+                            </div>
                         </div>
-                        <div style="flex:1;border:1px solid black;margin:2px 2px;border-radius:10px;">
+                        <div style="flex:1;border:1px solid black;margin:4px 8px;border-radius:10px;display:flex;flex-direction:column;align-items:center;justify-content:center;background-color:white;">
                             <p>Name:Arshia Datta</p>
                             <p>Role:backend</p>
-                            <p>Completion:5%</p>
+                            <div style="display:flex;flex-direction:row;width:200px;height:20px;border:1px solid black;margin:20px 20px;" class="container">
+                                <div style="background-color:rgb(77, 238, 112);width:50px;height:20px;"></div>
+                                <div style="flex:1;"></div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -34,5 +49,6 @@
                 
             </div>
         </div>
+        <script src="progress.js"></script>
     </body>
 </html>
