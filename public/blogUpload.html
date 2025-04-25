@@ -17,7 +17,7 @@
             <div style="margin-left:72px;border: 1px solid rgb(38, 4, 58);height:600px;margin-top:20px;width:550px;display:flex;flex-direction: column;align-items:center;justify-content:top;background-color: white;">
                 <div style="font-weight:bold;font-size:20px;padding:10px;">Write your blog</div>
 
-                <div style="display: flex;align-items: center;justify-content: center;flex:1;"><button class="add" style="height:70px;width:70px;border-radius:35px;font-size:40px;border:none;">+</button>
+                <div style="display: flex;align-items: center;justify-content: center;flex:1;"><button class="add" id="generateFallback" style="height:70px;width:70px;border-radius:35px;font-size:40px;border:none;">+</button>
                 </div>
             </div>
         </div>
@@ -25,24 +25,47 @@
             <div style="height:150px;width:700px;border: 1px solid rgb(38, 4, 58);background-color:purple;align-items:center;justify-content:center;display:flex;flex-direction: column;padding:0px;margin-bottom:15px;">
                 <div style="border:none;font-size:22px;font-weight:bold;padding:10px;color:white;">Title</div>
 
-                <input style="height:50px;width:660px;margin-top:10px;" type="text" placeholder="Enter title" id="blogTitle" style="width:100%;" readonly />
+                <input style="height:50px;width:660px;margin-top:10px;" type="text" placeholder="Fallback Title" id="blogTitle" style="width:100%;" readonly />
                 <button class="add" style="height:50px;width:50px;border-radius:25px;font-size:30px;border:none;margin-top:10px;margin-bottom:10px;">+</button>
             </div>
+
+                <textarea id="blogContent" placeholder="Fallback Content" style="width: 700px; height: 300px; margin-bottom: 15px;"></textarea>
 
                 <button id="submitButton" onclick="submitData()" style="margin:20px;padding:10px 20px;font-size:18px;border-radius:5px;color:white;background-color:purple">Submit</button>
         </div>
     </div>
     <script>
         document.addEventListener("DOMContentLoaded", () => {
-            // Populate title and content from localStorage
             const blogTitleInput = document.getElementById('blogTitle');
             const blogContentInput = document.getElementById('blogContent');
+            const generateFallbackButton = document.getElementById('generateFallback');
 
-            if (blogTitleInput) {
-                blogTitleInput.value = localStorage.getItem('blogTitle') || '';
+            const fallbackTitles = ["Idea 1...", "A thought...", "Something to write...", "Another topic...", "Let's consider..."];
+            const fallbackContents = ["Start writing here...", "Elaborate on your thoughts...", "The main content goes here...", "What are your insights?", "Begin your narrative..."];
+
+            function getRandomItem(list) {
+                return list[Math.floor(Math.random() * list.length)];
             }
-            if (blogContentInput) {
-                blogContentInput.value = localStorage.getItem('blogContent') || '';
+
+            function setFallbackText() {
+                if (!localStorage.getItem('blogTitle')) {
+                    blogTitleInput.value = getRandomItem(fallbackTitles);
+                } else {
+                    blogTitleInput.value = localStorage.getItem('blogTitle');
+                }
+
+                if (!localStorage.getItem('blogContent')) {
+                    blogContentInput.placeholder = getRandomItem(fallbackContents);
+                } else {
+                    blogContentInput.value = localStorage.getItem('blogContent');
+                }
+            }
+
+            // Set initial fallback text on load
+            setFallbackText();
+
+            if (generateFallbackButton) {
+                generateFallbackButton.addEventListener('click', setFallbackText);
             }
 
             const submitButton = document.getElementById('submitButton');
@@ -68,9 +91,6 @@
                 };
             }
         });
-
-
-        
     </script>
 </body>
 </html>
